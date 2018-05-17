@@ -2,20 +2,21 @@ FROM kalilinux/kali-linux-docker
 MAINTAINER feifeixj 220150878@seu.edu.cn
 RUN cp  /etc/apt/sources.list /etc/apt/sources.list.old
 ADD sources.list /etc/apt/sources.list
-RUN apt -y update
-RUN apt-get -y update
+RUN apt-get -yy update
 RUN apt-get -yy upgrade
 ENV BUILD_DEPS="git autoconf pkg-config libssl-dev libpam0g-dev \
     libx11-dev libxfixes-dev libxrandr-dev nasm xsltproc flex \
     bison libxml2-dev dpkg-dev libcap-dev"
 RUN apt-get -yy install \ 
-	sudo apt-utils software-properties-common vim wget net-tools iputils-ping traceroute ca-certificates \
+    sudo apt-utils software-properties-common vim wget net-tools iputils-ping traceroute ca-certificates \
      xauth supervisor uuid-runtime pulseaudio locales \
     pepperflashplugin-nonfree openssh-server \
     bwa samtools  zsh  ibus-kkc file  vcftools bedtools \
     supervisor  libxml2 mock gcc make python bash  \ 
     coreutils diffutils patch \
     $BUILD_DEPS
+
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 RUN apt install -y xterm git synapse kali-linux-full kali-desktop-lxde
 RUN apt install -y xfce4 xfce4-terminal xfce4-screenshooter xfce4-taskmanager \
